@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma Mensagem para Você</title>
+
+    <style>
+        /* Estilização Geral da Página */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0e6f2; /* Fundo suave */
+            color: #4b0082; /* Cor principal do texto */
+            text-align: center;
+            overflow: hidden;
+            transition: background-color 0.5s ease;
+        }
+
+        /* Estilos das Seções da Jornada */
+        .jornada-section {
+            display: none; /* Todas as seções começam escondidas */
+            padding: 20px;
+            max-width: 600px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Mostra a seção que deve ser visível */
+        #jornada-1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Estilo do Botão de Início */
+        .start-button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #8a2be2;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .start-button:hover {
+            transform: scale(1.05);
+            background-color: #6a5acd;
+        }
+
+        /* Estilo da Caixa de Senha */
+        #password-input {
+            padding: 10px;
+            font-size: 1em;
+            text-align: center;
+            border: 2px solid #8a2be2;
+            border-radius: 5px;
+            margin-top: 15px;
+            outline: none;
+        }
+
+        /* Estilo da Mensagem Final */
+        #final-message {
+            font-size: 1.5em;
+            line-height: 1.6;
+            font-weight: 500;
+            color: #4b0082;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="jornada-1" class="jornada-section">
+        <h1>Uma Jornada Feita para Você</h1>
+        <p>Clique no botão abaixo para começar.</p>
+        <button class="start-button" onclick="startJornada()">Iniciar</button>
+    </div>
+
+    <div id="jornada-2" class="jornada-section">
+        <h2>Desafio</h2>
+        <p>Qual é a palavra mágica para continuar?</p>
+        <p>Dica: É a palavra que representa o seu brilho.</p>
+        <input type="text" id="password-input" placeholder="Digite a palavra aqui..." onkeyup="checkPassword(event)">
+    </div>
+
+    <div id="jornada-final" class="jornada-section">
+        <h2 style="font-size: 2em; color: #8a2be2;">A Mensagem</h2>
+        <p id="final-message">
+            Você é uma pessoa realmente especial. Sua dedicação e a maneira incrível como você se entrega a tudo o que faz são inspiradoras. Saiba que todo esse seu esforço será recompensado e que coisas maravilhosas estão a caminho. Acredite no seu potencial, porque o futuro reserva um sucesso enorme para você.
+        </p>
+    </div>
+
+    <script>
+        // JavaScript para a Lógica da Jornada
+        const jornada1 = document.getElementById('jornada-1');
+        const jornada2 = document.getElementById('jornada-2');
+        const jornadaFinal = document.getElementById('jornada-final');
+        const passwordInput = document.getElementById('password-input');
+        const palavraSecreta = 'estrelinha'; // A palavra secreta
+
+        // Função para ir para a etapa 2
+        function startJornada() {
+            jornada1.style.display = 'none';
+            jornada2.style.display = 'flex';
+            passwordInput.focus(); // Coloca o cursor no campo de texto
+        }
+
+        // Função para checar a palavra secreta
+        function checkPassword(event) {
+            // Verifica se a tecla Enter foi pressionada
+            if (event.key === 'Enter') {
+                // Checa se o texto digitado é igual à palavra secreta (sem se importar com maiúsculas/minúsculas)
+                if (passwordInput.value.toLowerCase() === palavraSecreta) {
+                    revealMessage();
+                } else {
+                    alert('Palavra incorreta. Tente novamente!');
+                    passwordInput.value = ''; // Limpa o campo para nova tentativa
+                }
+            }
+        }
+
+        // Função para revelar a mensagem final
+        function revealMessage() {
+            jornada2.style.display = 'none';
+            jornadaFinal.style.display = 'flex';
+        }
+    </script>
+
+</body>
+</html>
